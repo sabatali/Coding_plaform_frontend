@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/authContext";
 import { ToastContainer, toast } from 'react-toastify';
 import DotsLoader from "../Components/DotsLoader/DotsLoader";
+import { local_url } from "../constent";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const Register = () => {
 
         try {
             setLoading(true)
-            const res = await axios.post("http://localhost:8000/api/v1/register", formData)
+            const res = await axios.post(`${local_url}/api/v1/register`, formData)
             console.log("🚀 ~ handleSubmit ~ res:", res)
 
             if (res.data.status === '250') {
@@ -60,7 +61,7 @@ const Register = () => {
 
         try {
             const email = formData.email;
-            const res = await axios.post("http://localhost:8000/api/v1/verifyemail", { email, otp });
+            const res = await axios.post(`${local_url}/api/v1/verifyemail`, { email, otp });
             console.log("🚀 ~ handleSubmitOTP ~ res:", res);
 
             if (res.data.status === "201") {

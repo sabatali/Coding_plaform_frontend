@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
+import { local_url } from '../constent';
 
 // Create the context
 const TableContext = createContext();
@@ -14,7 +15,7 @@ const TableProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/questions');
+        const response = await axios.get(`${local_url}/api/v1/questions`);
         setTableData(response.data.data);
         setLoading(false);
       } catch (error) {
