@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/authContext";
 import DotsLoader from "../Components/DotsLoader/DotsLoader";
 import { ToastContainer, toast } from 'react-toastify';
+import { local_url } from "../constent";
 
 const Login = () => {
   const { storeToken } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true)
-      const res = await axios.post("http://localhost:8000/api/v1/login", user);
+      const res = await axios.post(`${local_url}/api/v1/login`, user);
       console.log("🚀 ~ handleSubmit ~ axios:", res);
 
       

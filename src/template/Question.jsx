@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditorComponent from '../Services/EditorComponent';
 import DotsLoader from '../Components/DotsLoader/DotsLoader';
+import { local_url } from '../constent';
 
 const QuestionForm = () => {
   const [loading, setLoading] = useState(false)
@@ -32,7 +33,7 @@ const QuestionForm = () => {
 
     try {
       setLoading(true)
-      const response = await axios.post("http://localhost:8000/api/v1/question", 
+      const response = await axios.post(`${local_url}/api/v1/question`, 
         formData,
         { 
           headers: { Authorization: `Bearer ${userToken}` }

@@ -7,6 +7,7 @@ import SolutionComponet from "../Components/QuestionComponents/SolutionComponet"
 import CommentsComponet from "../Components/QuestionComponents/CommentsComponent";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { local_url } from "../constent";
 
 const QuestionDetailsPage = () => {
     const { id } = useParams();
@@ -21,7 +22,7 @@ const QuestionDetailsPage = () => {
     useEffect(() => {
         const fetchQuestionData = async () => {
           try {
-            const response = await axios.get(`http://localhost:8000/api/v1/question/${id}`);
+            const response = await axios.get(`${local_url}/api/v1/question/${id}`);
             setQuestionData(response.data.data);
             setLoading(false);
           } catch (error) {

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { local_url } from '../constent.js';
 
 export const AuthContext = createContext();
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const authData = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/v1/userdata", {
+      const response = await axios.get(`${local_url}/api/v1/userdata`, {
         headers: {
           Authorization: `Bearer ${token}` // Pass token in the Authorization header
         }

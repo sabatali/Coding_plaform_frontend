@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { local_url } from "../../constent";
 
 const ScraperComponet = (data) => {
     const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ const ScraperComponet = (data) => {
     const handleSubmit = async () => {
         setLoading(true);
         try {
-            const response = await axios.post(`http://localhost:8000/api/v1/resources`, formData);
+            const response = await axios.post(`${local_url}/api/v1/resources`, formData);
             setResources(response.data.data);
         } catch (error) {
             console.error('Error fetching question data:', error);
