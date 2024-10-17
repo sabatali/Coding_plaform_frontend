@@ -3,8 +3,9 @@ import AIContext from "../../Context/AIContext";
 import { AuthContext } from "../../Context/authContext";
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
+import { materialDark, okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
 import remarkGfm from 'remark-gfm'; 
+import BrandLoader from "../DotsLoader/BrandLoader";
 
 const AIComponent = (data) => {
     const { loading, result, error, fetchAIResponse } = useContext(AIContext);
@@ -21,20 +22,20 @@ const AIComponent = (data) => {
         await fetchAIResponse(formData.title);
     };
 
-    // Function to handle key press
+    // Handle Enter key press
     const handleKeyPress = (e) => {
         if (e.key === "Enter") {
             handleSubmit();
         }
     };
 
-    // Custom renderers for ReactMarkdown to handle code blocks
+    // Custom renderers for ReactMarkdown
     const renderers = {
         code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
                 <SyntaxHighlighter
-                    style={materialDark} // Black background and dark theme
+                    style={okaidia} 
                     language={match[1]}
                     PreTag="div"
                     {...props}
@@ -50,51 +51,53 @@ const AIComponent = (data) => {
     };
 
     return (
-        <div className="m-4">
+        <div className="m-6 p-6 bg-white rounded-lg">
             {/* Search Input Field */}
-            <div className="flex border-2 border-blue-300 shadow-lg overflow-hidden mb-5 font-[sans-serif] rounded-lg">
+            <div className="flex items-center border-2 border-blue-400  mb-6 rounded-lg overflow-hidden">
                 <input
                     type="text"
                     name="title"
-                    placeholder="Enter Prompt here"
+                    placeholder="Ask a question..."
                     value={formData.title}
                     onChange={handleChange}
-                    onKeyPress={handleKeyPress} // Trigger submit on "Enter"
+                    onKeyPress={handleKeyPress}
                     required
-                    className="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3"
+                    className="w-full px-4 py-3 text-lg bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
                 />
                 <button
                     type="button"
                     onClick={handleSubmit}
-                    className="flex items-center justify-center bg-[#007bff] px-5 text-sm text-white"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg transition-all duration-300"
                 >
-                    Enter
+                    Submit
                 </button>
             </div>
 
             {/* AI Response Section */}
-            <div className="">
+            <div>
                 {!loading && !result ? (
-                    <div className="text-start pt-7">
-                        <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-pink-500">
-                            Hello, {userData.fullName}
+                    <div className="text-start">
+                        <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-pink-500">
+                            Hello, {userData.fullName}!
                         </h1>
-                        <p className="text-gray-500 text-5xl mt-2">How can I help you today?</p>
+                        <p className="text-gray-500 text-2xl mt-4">What can I help you with today?</p>
                     </div>
                 ) : loading ? (
-                    <p>Loading...</p>
+                    <div className="">
+                        <BrandLoader/>
+                    </div>
                 ) : error ? (
-                    <p className="text-red-500">{error}</p>
+                    <p className="text-red-500 font-semibold">{error}</p>
                 ) : (
-                    // Display the AI response
-                    <div className="space-y-4">
+                    <div className="mt-8 bg-gray-100 p-6 rounded-lg shadow-md">
                         {result && (
-                            <div className="p-4 border rounded shadow-md">
-                                <h3 className="font-semibold">AI Response:</h3>
-                                <div className="response-content">
+                            <div className="space-y-4">
+                                <h2 className="text-2xl font-bold text-gray-800 mb-4">AI Response:</h2>
+                                <div className="response-content bg-white p-4 rounded-lg border border-gray-200 shadow-inner">
                                     <ReactMarkdown
                                         components={renderers}
-                                        remarkPlugins={[remarkGfm]} // GitHub flavored markdown support
+                                        remarkPlugins={[remarkGfm]}
+                                        className="prose prose-lg"
                                     >
                                         {result.response}
                                     </ReactMarkdown>
