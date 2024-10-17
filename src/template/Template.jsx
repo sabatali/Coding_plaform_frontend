@@ -2,6 +2,7 @@ import SideMenu from "./SideMenu";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { useContext, useRef } from "react";
+import BetaBanner from "../Components/BetaBanner";
 
 function Template(props) {
   const contentRef = useRef();
@@ -14,6 +15,8 @@ function Template(props) {
 
 
   return (
+    <div>
+    <BetaBanner />
     <div className="grid grid-cols-6 md:grid-cols-12 gap-0 h-full">
       <div className="col-span-1 md:col-span-1 lg:col-span-2">
         <SideMenu />
@@ -29,6 +32,7 @@ function Template(props) {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
