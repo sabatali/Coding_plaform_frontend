@@ -2,18 +2,27 @@ import PropTypes from "prop-types";
 
 function QuickStackCard(props) {
   return (
-    <div className="rounded-md shadow bg-white flex flex-col">
-      <div className="flex space-x-4 items-center px-4 py-3">
-        {props.children}
+    <div className="relative bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+      <div className="flex space-x-4 items-center">
+        <div className="bg-white rounded-full p-3">
+          {props.children}
+        </div>
         <div className="flex flex-col space-y-1">
-          <h3 className="font-lg text-gray-500">{props.title}</h3>
-          <span className="font-semibold text-2xl text-gray-600">
+          <h3 className="text-xl font-semibold">
+            {props.title}
+          </h3>
+          <span className="text-3xl font-bold">
             {props.statics}
           </span>
         </div>
       </div>
-      <div className="bg-gray-50 px-4 py-3 rounded-b-md">
-        <a href="!#" className="text-sm text-indigo-500 hover:text-indigo-700">View all</a>
+      <div className="absolute bottom-0 right-0 p-4">
+        <a
+          href="!#"
+          className="text-sm font-medium text-white border-b border-white hover:text-yellow-300 transition-all duration-200"
+        >
+          View all
+        </a>
       </div>
     </div>
   );
@@ -25,3 +34,4 @@ QuickStackCard.propTypes = {
 };
 
 export default QuickStackCard;
+
