@@ -4,9 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "@heroicons/react/outline";
 import { FcClearFilters } from "react-icons/fc";
 import { TbFilterSearch } from "react-icons/tb";
+import { AiFillDelete } from "react-icons/ai"; 
+import axios from "axios";
+import { local_url } from "../constent";
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from "../Context/authContext";
+
 
 const QuestionTable = () => {
-  const { tableData, loading, error } = useContext(TableContext);
+  const { userData } = useContext(AuthContext);
+  const { tableData, loading, error, setTableData } = useContext(TableContext); // Assume `setTableData` is available in context for updating table
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedUser, setSelectedUser] = useState("");
@@ -60,12 +67,26 @@ const QuestionTable = () => {
       (selectedDifficulty === "" || item.difficulty === selectedDifficulty)
   );
 
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.post(`${local_url}/api/v1/question/${id}`, {userData});
+
+      console.log("🚀 ~ handleDelete ~ res:", res)
+      toast.success(res.data.message);
+    } catch (error) {
+      console.error("Error deleting question:", error.response);
+      toast.error( 
+        error.response.data.message || "Failed to delete question");
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading data: {error.message}</p>;
 
   return (
     <div className="overflow-x-auto rounded-lg shadow-xl p-4 bg-white dark:bg-gray-800 transition-colors">
       {/* Header Section */}
+      <ToastContainer/>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
           Questions
@@ -196,46 +217,35 @@ const QuestionTable = () => {
       {/* Table Section */}
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-lg shadow-sm">
-          <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
+          <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 text-gray-900 dark:text-gray-200">
             <tr>
-              <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wider">
-                Title
-              </th>
-              <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wider">
-                Question Type
-              </th>
-              <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wider">
-                Language
-              </th>
-              <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wider">
-                Difficulty
-              </th>
-              <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wider">
-                Created By
-              </th>
-              <th className="py-4 px-6 text-left text-sm font-semibold uppercase tracking-wider">
-                Created At
-              </th>
+              <th className="p-3 text-left">Title</th>
+              <th className="p-3 text-left">Language</th>
+              <th className="p-3 text-left">Difficulty</th>
+              <th className="p-3 text-left">User</th>
+              <th className="p-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-gray-800">
-            {filteredData.map((row, index) => (
-              <tr
-                key={index}
-                onClick={() => handleButtonClick(row._id)}
-                className={`cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-150 ${
-                  index % 2 === 0
-                    ? "bg-gray-50 dark:bg-gray-900"
-                    : "bg-white dark:bg-gray-800"
-                }`}
-              >
-                <td className="py-4 px-6 text-sm">{`${index + 1} `} {row.title}</td>
-                <td className="py-4 px-6 text-sm">{row.questionType}</td>
-                <td className="py-4 px-6 text-sm">{row.language}</td>
-                <td className="py-4 px-6 text-sm">{row.difficulty}</td>
-                <td className="py-4 px-6 text-sm">{row.createdByUser}</td>
-                <td className="py-4 px-6 text-sm">
-                  {new Date(row.createdAt).toLocaleDateString()}
+          <tbody>
+            {filteredData?.map((item) => (
+              <tr key={item._id} className="border-t border-gray-200 dark:border-gray-600">
+                <td className="p-3">{item.title}</td>
+                <td className="p-3">{item.language}</td>
+                <td className="p-3">{item.difficulty}</td>
+                <td className="p-3">{item.createdByUser}</td>
+                <td className="p-3 flex justify-center gap-4">
+                  <button
+                    onClick={() => handleButtonClick(item._id)}
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <AiFillDelete size={20} />
+                  </button>
                 </td>
               </tr>
             ))}
