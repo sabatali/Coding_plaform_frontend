@@ -11,6 +11,8 @@ import { useContext } from 'react';
 import ProfilePage from './pages/Profile';
 import { ChatWithAI } from './pages/ChatWithAI';
 import AssignmentPrompt from './Components/AssignmentPrompt';
+import BetaBanner from './Components/BetaBanner';
+import FeedbackPage from './pages/FeedbackPage';
 
 function App() {
   const { isLogin } = useContext(AuthContext);
@@ -19,6 +21,7 @@ function App() {
   return (
     <>
       {!!isLogin ? (
+        
         <Template>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -28,6 +31,7 @@ function App() {
             <Route path="/chatwith_ai" element={<ChatWithAI />} />
             <Route path="/questions-table" element={<QuestionTable />} />
             <Route path="/questions/:id" element={<QuestionDetailsPage />} />
+            <Route path="/feedbacke" element={<FeedbackPage />} />
             <Route path="/" element={<Navigate to="/dashboard" />} />
           </Routes>
         </Template>
