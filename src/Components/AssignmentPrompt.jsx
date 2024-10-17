@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 import { saveAs } from 'file-saver';
+import { local_url } from '../constent';
 
 const AssignmentForm = () => {
     const [result, setResult] = useState(null);
@@ -47,7 +48,7 @@ const AssignmentForm = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:8000/api/v1/assingment_prompt", formData);
+            const response = await axios.post(`${local_url}/api/v1/assingment_prompt`, formData);
             setResult(response.data);
             // Clear form fields
             setFormData({
