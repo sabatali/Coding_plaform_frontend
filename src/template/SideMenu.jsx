@@ -1,19 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faFileAlt, faCog, faSquare } from '@fortawesome/free-solid-svg-icons'; // Importing the necessary FontAwesome icons
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faFileAlt,
+  faCog,
+  faSquare,
+  faRobot,
+  faFileLines,
+  faFileCirclePlus,
+  faPenToSquare,
+  faUser,
+  faComments
+} from "@fortawesome/free-solid-svg-icons";
+import { Link, useLocation } from "react-router-dom";
 
 function Header(props) {
-  const headerHeight = '72px';
+  const headerHeight = "72px";
 
   return (
     <div
-      className="flex lg:space-x-3 justify-center lg:justify-start lg:px-3 border-b border-gray-900 items-center"
+      className="flex lg:space-x-3 justify-center lg:justify-start lg:px-3 border-b border-gray-900 items-center bg-gray-800 shadow-md"
       style={{ height: headerHeight }}
     >
-      <img src="src/assets/logo.png" alt="" width={80}/>
-      <h2 className="text-white text-2xl font-semibold hidden lg:inline">
+      <h2 className="text-white text-2xl font-semibold hidden px-4 lg:inline">
         {props.title}
       </h2>
     </div>
@@ -22,17 +32,17 @@ function Header(props) {
 
 function MenuItem(props) {
   let activeClass =
-    " text-gray-400 lg:rounded-md hover:text-white hover:bg-gray-700";
+    "text-gray-400 lg:rounded-md hover:text-white hover:bg-gray-700 transition duration-200";
 
   if (props.active) {
-    activeClass = " lg:rounded-md text-white bg-gray-900";
+    activeClass = "lg:rounded-md text-white bg-gray-900";
   }
 
   return (
     <Link
       to={props.to}
       replace
-      className={"lg:mx-2 py-4 lg:py-2 lg:px-3 flex justify-center lg:justify-start space-x-4 items-center truncate " + activeClass}
+      className={`lg:mx-2 py-4 lg:py-2 lg:px-3 flex justify-center lg:justify-start space-x-4 items-center truncate  ${activeClass}`}
     >
       {props.children}
       <span className="hidden lg:inline">{props.title}</span>
@@ -41,39 +51,92 @@ function MenuItem(props) {
 }
 
 function SideMenu(props) {
-  const itemIconClass = "w-8 h-8 lg:w-5 lg:h-5";
+  const itemIconClass =
+    "w-8 h-8 lg:w-5 lg:h-5 text-gray-400 transition duration-200 hover:text-white";
   const location = useLocation();
 
   return (
-    <div className="bg-gray-800 overflow-y-auto h-screen">
-      <Header title="Code" />
+    <div className="bg-gray-800 overflow-y-auto h-screen shadow-lg">
+      <Header title="Code P" />
       <ul className="lg:mt-2 lg:space-y-2">
-        <MenuItem to="/dashboard" title="Dashboard" active={location.pathname === '/dashboard'}>
+        <MenuItem
+          to="/dashboard"
+          title="Dashboard"
+          active={location.pathname === "/dashboard"}
+        >
           <FontAwesomeIcon icon={faHome} className={itemIconClass} />
         </MenuItem>
 
-        <MenuItem to="/questions-table" title="All Questions" active={location.pathname === '/questions-table'}>
-          <FontAwesomeIcon icon={faCog} className={itemIconClass} />
-        </MenuItem>
-        
-        <MenuItem to="/question" title="Add Question" active={location.pathname === '/question'}>
-          <FontAwesomeIcon icon={faCog} className={itemIconClass} />
+        <MenuItem
+          to="/chatwith_ai"
+          title="Chat With AI"
+          active={location.pathname === "/chatwith_ai"}
+        >
+          <FontAwesomeIcon icon={faRobot} className={itemIconClass} />
         </MenuItem>
 
-        <MenuItem to="/chatwith_ai" title="Chat With AI" active={location.pathname === '/chatwith_ai'}>
-          <FontAwesomeIcon icon={faCog} className={itemIconClass} />
+        <MenuItem
+          to="/assignmentprompt"
+          title="Assignment Writer"
+          active={location.pathname === "/assignmentprompt"}
+        >
+          <FontAwesomeIcon icon={faPenToSquare} className={itemIconClass} />
+        </MenuItem>
+
+        <MenuItem
+          to="/questions-table"
+          title="All Questions"
+          active={location.pathname === "/questions-table"}
+        >
+          <FontAwesomeIcon icon={faFileAlt} className={itemIconClass} />
+        </MenuItem>
+
+        <MenuItem
+          to="/file-table"
+          title="All Documents"
+          active={location.pathname === "/file-table"}
+        >
+          <FontAwesomeIcon icon={faFileLines} className={itemIconClass} />
         </MenuItem>
 
         <div>
           <span className="my-3 lg:my-5 border-b border-gray-900 block"></span>
         </div>
 
-        <MenuItem to="/profile" title="Profile">
-          <FontAwesomeIcon icon={faCog} className={itemIconClass} />
+        <MenuItem
+          to="/question"
+          title="Add Question"
+          active={location.pathname === "/question"}
+        >
+          <FontAwesomeIcon icon={faSquare} className={itemIconClass} />
         </MenuItem>
 
-        <MenuItem to="/register" title="Add User">
-          <FontAwesomeIcon icon={faCog} className={itemIconClass} />
+        <MenuItem
+          to="/add-files"
+          title="Add Documents"
+          active={location.pathname === "/add-files"}
+        >
+          <FontAwesomeIcon icon={faFileCirclePlus} className={itemIconClass} />
+        </MenuItem>
+
+        <div>
+          <span className="my-3 lg:my-5 border-b border-gray-900 block"></span>
+        </div>
+
+        <MenuItem
+          to="/profile"
+          title="Profile"
+          active={location.pathname === "/profile"}
+        >
+          <FontAwesomeIcon icon={faUser} className={itemIconClass} />
+        </MenuItem>
+
+        <MenuItem
+          to="/feedbacke"
+          title="Give Feedback"
+          active={location.pathname === "/feedbacke"}
+        >
+          <FontAwesomeIcon icon={faComments}  className={itemIconClass} />
         </MenuItem>
       </ul>
     </div>
