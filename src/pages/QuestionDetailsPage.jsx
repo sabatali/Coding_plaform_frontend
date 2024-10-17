@@ -8,6 +8,7 @@ import CommentsComponet from "../Components/QuestionComponents/CommentsComponent
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { local_url } from "../constent";
+import BrandLoader from "../Components/DotsLoader/BrandLoader";
 
 const QuestionDetailsPage = () => {
     const { id } = useParams();
@@ -38,11 +39,13 @@ const QuestionDetailsPage = () => {
         setActiveComponent(act);
     };
 
-    const buttonBaseStyle = "w-full p-3 rounded-lg text-lg font-semibold transition-all duration-300";
-    const buttonActiveStyle = "bg-blue-600 text-white shadow-lg";
-    const buttonInactiveStyle = "bg-gray-300 text-gray-800";
-
-    if (loading) return <p>Loading...</p>;
+    const buttonBaseStyle =
+    "w-full md:w-1/6 p-3 rounded-lg text-lg font-semibold transition-all duration-300";
+  const buttonActiveStyle =
+    "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg";
+  const buttonInactiveStyle =
+    "bg-gray-200 text-gray-700 hover:bg-gray-300 hover:shadow-md cursor-pointer";
+    if (loading) return  <BrandLoader/>;
 
 
     return (
