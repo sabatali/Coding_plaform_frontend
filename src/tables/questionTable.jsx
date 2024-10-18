@@ -71,7 +71,8 @@ const QuestionTable = () => {
     try {
       const res = await axios.post(`${local_url}/api/v1/question/${id}`, {userData});
 
-      console.log("🚀 ~ handleDelete ~ res:", res)
+      // console.log("🚀 ~ handleDelete ~ res:", res)
+      window.location.reload();
       toast.success(res.data.message);
     } catch (error) {
       console.error("Error deleting question:", error.response);

@@ -9,6 +9,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { local_url } from "../constent";
 import BrandLoader from "../Components/DotsLoader/BrandLoader";
+import JavaCodeCompiler from "../Components/QuestionComponents/JavaCodeCompiler";
 
 const QuestionDetailsPage = () => {
     const { id } = useParams();
@@ -65,6 +66,15 @@ const QuestionDetailsPage = () => {
                 >
                     Resources
                 </button>
+
+                <button
+                    type="button"
+                    className={`${buttonBaseStyle} ${activeComponent === "jcc" ? buttonActiveStyle : buttonInactiveStyle}`}
+                    onClick={() => handleActiveButton("jcc")}
+                >
+                    Compiler
+                </button>
+
                 <button
                     type="button"
                     className={`${buttonBaseStyle} ${activeComponent === "ai" ? buttonActiveStyle : buttonInactiveStyle}`}
@@ -86,13 +96,13 @@ const QuestionDetailsPage = () => {
                 >
                     Solution
                 </button>
-                <button
+                {/* <button
                     type="button"
                     className={`${buttonBaseStyle} ${activeComponent === "com" ? buttonActiveStyle : buttonInactiveStyle}`}
                     onClick={() => handleActiveButton("com")}
                 >
                     Comments
-                </button>
+                </button> */}
             </div>
 
             <div className="p-4 border border-gray-200 rounded-lg bg-white shadow-xl">
@@ -102,6 +112,7 @@ const QuestionDetailsPage = () => {
                 {activeComponent === "v" && <VideoComponent data={questionData} />}
                 {activeComponent === "sol" && <SolutionComponet data={questionData} />}
                 {activeComponent === "com" && <CommentsComponet data={questionData} />}
+                {activeComponent === "jcc" && <JavaCodeCompiler data={questionData} />}
             </div>
         </div>
     );
