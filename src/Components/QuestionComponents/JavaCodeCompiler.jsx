@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import axios from 'axios';
+import { local_url } from '../../constent';
 
 const JavaCodeCompiler = () => {
   const [code, setCode] = useState(`public class Main {
@@ -17,7 +18,7 @@ const [loading, setLoading] = useState(false)
     e.preventDefault();
     setLoading(true)
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/compiler', { code });
+      const response = await axios.post(`${local_url}/api/v1/compiler`, { code });
       setOutput(response.data.output || response.data.error);
       setLoading(false)
     } catch (error) {
