@@ -38,7 +38,6 @@ function NavBar() {
 
   useEffect(() => {
     updateGreeting();
-    // Load profile image from localStorage on component mount
     const storedImage = localStorage.getItem("profileImage");
     if (storedImage) {
       setProfileImage(storedImage);
@@ -67,18 +66,23 @@ function NavBar() {
 
       <div className="flex items-center space-x-6">
         <a href="!#" className="relative text-gray-500 hover:text-indigo-600 transition duration-150 ease-in-out">
-          <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span>
+          {/* <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span> */}
           <BellIcon className="w-6 h-6" />
         </a>
 
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button className="flex items-center text-gray-500 hover:text-indigo-600 focus:outline-none transition duration-150 ease-in-out">
+              <div>
               <img
                 className="rounded-full w-10 h-10 border-2 border-indigo-600 shadow-md"
                 src={`https://ui-avatars.com/api/?name=${userData.fullName}&background=4F46E5&color=fff&size=128`}
                 alt="User Avatar"
               />
+                        <span className="absolute top-0 left-0 w-3 h-3 bg-green-600 rounded-full"></span>
+
+              </div>
+              
               <span className="font-medium ml-3 mr-1">{userData.username}</span>
               <ChevronDownIcon className="w-5 h-5" aria-hidden="true" />
             </Menu.Button>
