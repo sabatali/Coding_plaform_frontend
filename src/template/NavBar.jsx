@@ -65,7 +65,7 @@ function NavBar() {
       </div>
 
       <div className="flex items-center space-x-6">
-        <a href="!#" className="relative text-gray-500 hover:text-indigo-600 transition duration-150 ease-in-out">
+        <a href="" className="relative text-gray-500 hover:text-indigo-600 transition duration-150 ease-in-out">
           {/* <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full"></span> */}
           <BellIcon className="w-6 h-6" />
         </a>

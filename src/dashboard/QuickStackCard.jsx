@@ -18,7 +18,7 @@ function QuickStackCard(props) {
       </div>
       <div className="absolute bottom-0 right-0 p-4">
         <a
-          href="!#"
+          href=""
           className="text-sm font-medium text-white border-b border-white hover:text-yellow-300 transition-all duration-200"
         >
           View all
