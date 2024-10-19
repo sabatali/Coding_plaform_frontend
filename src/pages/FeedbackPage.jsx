@@ -5,12 +5,13 @@ const FeedbackPage = () => {
     const { userData } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
-    name: userData.fullName,
+    fullName: userData.fullName,
     email: userData.email,
     feedback: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,21 +20,39 @@ const FeedbackPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Here you can handle sending the feedback data to your backend
-    console.log('Feedback submitted:', formData);
-    
-    // Reset form and show thank you message
-    setFormData({
-      name: '',
-      email: '',
-      feedback: '',
-    });
-    setSubmitted(true);
-  };
+    setLoading(true)
+    try {
+      console.log('Feedback submitted:', formData);
+  
+      const response = await fetch('https://platform-backend-6njk.onrender.com/api/v1/feedbacke', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      
+        const data = await response.json();
+        console.log('Feedback submission response:', data);
+        
+        setFormData({
+          fullName: '',
+          email: '',
+          feedback: '',
+        });
+        setLoading(false)
+        setSubmitted(true); 
 
+    } catch (error) {
+      setLoading(false)
+      console.error('Error during feedback submission:', error);
+      alert('Error submitting feedback. Please check your network and try again.');
+    }
+  };
+  
   return (
     <div className=" bg-gray-100  py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
@@ -47,12 +66,12 @@ const FeedbackPage = () => {
       ) : (
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white shadow-md rounded-lg p-6">
           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+            <label htmlFor="fullName" className="block text-gray-700 font-medium mb-2">
               Name
             </label>
             <input
               type="text"
-              name="name"
+              name="fullName"
               value={formData.name}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
