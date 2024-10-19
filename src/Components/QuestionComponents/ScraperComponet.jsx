@@ -7,7 +7,7 @@ const ScraperComponet = (data) => {
     let title = data.data.title;
     const [formData, setFormData] = useState({ title });
     const [resources, setResources] = useState([]);
-    console.log("🚀 ~ ScraperComponet ~ resources:", resources);
+    // console.log("🚀 ~ ScraperComponet ~ resources:", resources);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

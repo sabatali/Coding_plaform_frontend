@@ -1,7 +1,7 @@
 
 
 const QuestionComponet = (data) => {
-    console.log("🚀 ~ QuestionComponet ~ data:", data)
+    // console.log("🚀 ~ QuestionComponet ~ data:", data)
 
 
 

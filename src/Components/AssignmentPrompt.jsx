@@ -14,7 +14,7 @@ import { local_url } from '../constent';
 
 const AssignmentForm = () => {
     const [result, setResult] = useState(null);
-    console.log("🚀 ~ AssignmentForm ~ result:", result)
+    // console.log("🚀 ~ AssignmentForm ~ result:", result)
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         subjectName: '',

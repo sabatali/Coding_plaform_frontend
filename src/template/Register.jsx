@@ -22,7 +22,7 @@ const Register = () => {
 
     const [otp, setOtp] = useState("")
     const [isOtp, setIsOtpSent] = useState(false)
-    console.log("🚀 ~ Register ~ isOtp:", isOtp)
+    // console.log("🚀 ~ Register ~ isOtp:", isOtp)
 
     const handleInput = (e) => {
         const name = e.target.name
@@ -40,7 +40,7 @@ const Register = () => {
         try {
             setLoading(true)
             const res = await axios.post(`${local_url}/api/v1/register`, formData)
-            console.log("🚀 ~ handleSubmit ~ res:", res)
+            // console.log("🚀 ~ handleSubmit ~ res:", res)
 
             if (res.data.status === '250') {
                 setLoading(false)
@@ -49,7 +49,7 @@ const Register = () => {
             }
 
         } catch (error) {
-            console.log("🚀 ~ handleSubmit ~ error:", error.message)
+            // console.log("🚀 ~ handleSubmit ~ error:", error.message)
             toast.error(error.response.data.message)
             setLoading(false)
         }
@@ -62,7 +62,7 @@ const Register = () => {
         try {
             const email = formData.email;
             const res = await axios.post(`${local_url}/api/v1/verifyemail`, { email, otp });
-            console.log("🚀 ~ handleSubmitOTP ~ res:", res);
+            // console.log("🚀 ~ handleSubmitOTP ~ res:", res);
 
             if (res.data.status === "201") {
                 toast.success(res.data.message);
@@ -75,7 +75,7 @@ const Register = () => {
             }
 
         } catch (error) {
-            console.log("🚀 ~ handleSubmit ~ error:", error);
+            // console.log("🚀 ~ handleSubmit ~ error:", error);
 
             if (error.response && error.response.data && error.response.data.message) {
                 toast.error(error.response.data.message);  // Adjusted for error handling

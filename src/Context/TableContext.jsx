@@ -15,7 +15,7 @@ const TableProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${local_url}/api/v1/questions`);
+        // const response = await axios.get(`${local_url}/api/v1/questions`);
         setTableData(response.data.data);
         setLoading(false);
       } catch (error) {

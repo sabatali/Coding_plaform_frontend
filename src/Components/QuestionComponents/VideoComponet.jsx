@@ -1,5 +1,5 @@
 const VideoComponent = (data) => {
-console.log("🚀 ~ VideoComponent ~ data:", data.data.videoLink)
+// console.log("🚀 ~ VideoComponent ~ data:", data.data.videoLink)
 const videoLink = data.data.videoLink ;
     
     // Function to convert shortened YouTube URL to embed URL
