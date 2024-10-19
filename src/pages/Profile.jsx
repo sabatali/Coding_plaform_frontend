@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Context/authContext';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
@@ -7,7 +7,7 @@ import DotsLoader from '../Components/DotsLoader/DotsLoader';
 
 const ProfilePage = () => {
     const { userData } = useContext(AuthContext);
-    const [loading , setLoading] = useContext(false)
+    const [loading , setLoading] = useState(false)
     
 
     console.log("🚀 ~ ProfilePage ~ userData:", userData)
