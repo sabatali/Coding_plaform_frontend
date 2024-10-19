@@ -11,7 +11,8 @@ import {
   faFileCirclePlus,
   faPenToSquare,
   faUser,
-  faComments
+  faComments,
+  faCode
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
 
@@ -74,6 +75,13 @@ function SideMenu(props) {
         >
           <FontAwesomeIcon icon={faRobot} className={itemIconClass} />
         </MenuItem>
+
+        <MenuItem
+          to="/java-compiler"
+          title="Java Compiler"
+          active={location.pathname === "/java-compiler"}
+        >
+<FontAwesomeIcon icon={faCode} />        </MenuItem>
 
         <MenuItem
           to="/assignmentprompt"

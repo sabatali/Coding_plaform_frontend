@@ -1,13 +1,32 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Context/authContext';
+import { toast, ToastContainer } from 'react-toastify';
+import axios from 'axios';
+import { live_url, local_url } from '../constent';
 
 const ProfilePage = () => {
     const { userData } = useContext(AuthContext);
+    
 
+    console.log("🚀 ~ ProfilePage ~ userData:", userData)
+
+    const handleUpdateUser = async (id) => {
+      try {
+        const res = await axios.post(`${live_url}/api/v1/adminmail/${id}`);
+  
+        console.log("🚀 ~ handleDelete ~ res:", res)
+        toast.success(res.data.message || "Request Sended");
+      } catch (error) {
+        console.error("Failed to send request:", error);
+        toast.error( 
+          error || "Failed to send request ");
+      }
+    };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
+      <ToastContainer />
         <div className="flex flex-col items-center space-y-4">
           <div className="relative">
             <img
@@ -59,6 +78,17 @@ const ProfilePage = () => {
             <p className="text-gray-600">Joined:</p>
             <p className="text-indigo-600">{new Date(userData.createdAt).toDateString()}</p>
           </div>
+
+          {!(userData.role == "contributor") &&
+          <button onClick={() =>  handleUpdateUser(userData._id)} class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+          <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+          <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+          <span class="relative text-white">Become Contributor</span>
+          </button>
+
+          }
+
+
         </div>
       </div>
     </div>

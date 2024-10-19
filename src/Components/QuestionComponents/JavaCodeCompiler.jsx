@@ -22,8 +22,9 @@ const [loading, setLoading] = useState(false)
       setOutput(response.data.output || response.data.error);
       setLoading(false)
     } catch (error) {
+        console.log("🚀 ~ handleSubmit ~ error:", error)
         setLoading(false)
-      setOutput('Error compiling code.');
+      setOutput( error.response.data.error || 'Error compiling code.');
     }
   };
 
