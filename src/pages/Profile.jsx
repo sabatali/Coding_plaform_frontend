@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Context/authContext';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
-import { live_url, local_url } from '../constent';
+import { local_url } from '../constent';
 
 const ProfilePage = () => {
     const { userData } = useContext(AuthContext);
@@ -12,14 +12,14 @@ const ProfilePage = () => {
 
     const handleUpdateUser = async (id) => {
       try {
-        const res = await axios.post(`${live_url}/api/v1/adminmail/${id}`);
+        const res = await axios.post(`${local_url}/api/v1/adminmail/${id}`);
   
         console.log("🚀 ~ handleDelete ~ res:", res)
         toast.success(res.data.message || "Request Sended");
       } catch (error) {
         console.error("Failed to send request:", error);
         toast.error( 
-          error || "Failed to send request ");
+       "Failed to send request ");
       }
     };
 
