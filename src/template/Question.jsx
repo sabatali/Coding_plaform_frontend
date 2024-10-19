@@ -1,13 +1,15 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditorComponent from '../Services/EditorComponent';
 import DotsLoader from '../Components/DotsLoader/DotsLoader';
 import { local_url } from '../constent';
+import { AuthContext } from '../Context/authContext';
 
 const QuestionForm = () => {
   const [loading, setLoading] = useState(false);
+  const { userData } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -39,7 +41,7 @@ const QuestionForm = () => {
           headers: { Authorization: `Bearer ${userToken}` }
         }
       );
-      console.log("🚀 ~ handleSubmit ~ response:", response);
+      // console.log("🚀 ~ handleSubmit ~ response:", response);
 
       if (response.status === 200) {
         setLoading(false);
@@ -60,13 +62,25 @@ const QuestionForm = () => {
 
     } catch (error) {
       setLoading(false);
-      console.log("🚀 ~ handleSubmit ~ error:", error);
+      // console.log("🚀 ~ handleSubmit ~ error:", error);
       toast.error(error.response.data.message);
     }
   };
 
   return (
     <div className="items-center min-h-screen bg-gray-100 p-4 w-full">
+      {userData.role !== "contrifbutor" && (
+        <div className="bg-yellow-400 text-gray-800 py-3 px-4 flex justify-between items-center top-0 left-0 right-0 z-50 shadow-md animate-slideDown">
+        <div className="text-lg font-semibold text-red-700 flex items-center">
+          🚧 
+          <span className="ml-2">
+            Your account does not have permission to add questions. 
+            <span className="ml-1">Please visit your profile page and click on "Become Contributor".</span>
+          </span>
+        </div>
+      </div>
+
+      ) }
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-8 space-y-6 bg-white rounded-lg shadow-lg">
         <ToastContainer />
         <h2 className="text-3xl font-semibold text-center mb-6 text-blue-600">Submit Your Question</h2>

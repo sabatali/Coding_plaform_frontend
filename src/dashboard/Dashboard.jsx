@@ -3,15 +3,24 @@ import { TableContext } from "../Context/TableContext";
 import QuestionTable from "../tables/questionTable";
 import QuickStackCard from "./QuickStackCard";
 import {
-  UserGroupIcon,
   DocumentTextIcon,
   FolderIcon,
   UsersIcon,
-} from "@heroicons/react/outline"; // Updated Icons
+} from "@heroicons/react/outline";
 
 function Dashboard() {
   const { tableData } = useContext(TableContext);
+  
   const loading = false; // For testing, we assume loading is false now
+
+  // Get today's date in 'YYYY-MM-DD' format
+  const today = new Date().toISOString().split("T")[0];
+
+  // Filter the questions created today by comparing 'createdAt' with today's date
+  const todayQuestions = tableData.filter((question) => {
+    const questionDate = question.createdAt.split("T")[0]; // Get 'YYYY-MM-DD' part
+    return questionDate === today;
+  });
 
   const iconClass = "w-10 h-10 text-gray-400";
 
@@ -23,33 +32,19 @@ function Dashboard() {
           <DocumentTextIcon className={iconClass} />
         </QuickStackCard>
 
-        {/* Today Questions or Today Posts */}
-        {!loading ? (
-          <>
-            <QuickStackCard title="Today Questions" statics={"00"}>
-              <DocumentTextIcon className={iconClass} />
-            </QuickStackCard>
-          </>
-        ) : (
-          <>
-            <QuickStackCard title="Today Posts" statics={"00"}>
-              <DocumentTextIcon className={iconClass} />
-            </QuickStackCard>
-          </>
-        )}
+        <QuickStackCard title="Today Questions" statics={todayQuestions.length}>
+          <DocumentTextIcon className={iconClass} />
+        </QuickStackCard>
 
-        {/* Total Files */}
         <QuickStackCard title="Total Files" statics={"00"}>
           <FolderIcon className={iconClass} />
         </QuickStackCard>
 
-        {/* Total Users */}
         <QuickStackCard title="Total Users" statics="00">
           <UsersIcon className={iconClass} />
         </QuickStackCard>
       </div>
 
-      {/* Question Table */}
       <div className="">
         <QuestionTable />
       </div>

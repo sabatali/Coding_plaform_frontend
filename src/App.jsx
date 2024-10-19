@@ -17,7 +17,7 @@ import JavaCodeCompiler from './Components/QuestionComponents/JavaCodeCompiler';
 
 function App() {
   const { isLogin } = useContext(AuthContext);
-  console.log("🚀 ~ App ~ isLogin:", isLogin);
+  // console.log("🚀 ~ App ~ isLogin:", isLogin);
 
   return (
     <>
