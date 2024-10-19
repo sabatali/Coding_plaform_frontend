@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Context/authContext';
+import DotsLoader from '../Components/DotsLoader/DotsLoader';
 
 const FeedbackPage = () => {
-    const { userData } = useContext(AuthContext);
+  const { userData } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     fullName: userData.fullName,
@@ -25,7 +26,7 @@ const FeedbackPage = () => {
     setLoading(true)
     try {
       console.log('Feedback submitted:', formData);
-  
+
       const response = await fetch('https://platform-backend-6njk.onrender.com/api/v1/feedbacke', {
         method: 'POST',
         headers: {
@@ -33,18 +34,18 @@ const FeedbackPage = () => {
         },
         body: JSON.stringify(formData),
       });
-  
-      
-        const data = await response.json();
-        console.log('Feedback submission response:', data);
-        
-        setFormData({
-          fullName: '',
-          email: '',
-          feedback: '',
-        });
-        setLoading(false)
-        setSubmitted(true); 
+
+
+      const data = await response.json();
+      console.log('Feedback submission response:', data);
+
+      setFormData({
+        fullName: '',
+        email: '',
+        feedback: '',
+      });
+      setLoading(false)
+      setSubmitted(true);
 
     } catch (error) {
       setLoading(false)
@@ -52,7 +53,7 @@ const FeedbackPage = () => {
       alert('Error submitting feedback. Please check your network and try again.');
     }
   };
-  
+
   return (
     <div className=" bg-gray-100  py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
@@ -72,7 +73,7 @@ const FeedbackPage = () => {
             <input
               type="text"
               name="fullName"
-              value={formData.name}
+              value={formData.fullName}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
@@ -106,15 +107,26 @@ const FeedbackPage = () => {
               required
             />
           </div>
+          {!loading ? (
+            <div className="text-center">
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                Submit Feedback
+              </button>
+            </div>
+          ) : (
+            <div className="text-center">
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <DotsLoader />
+              </button>
+            </div>
+          )}
 
-          <div className="text-center">
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              Submit Feedback
-            </button>
-          </div>
         </form>
       )}
     </div>
