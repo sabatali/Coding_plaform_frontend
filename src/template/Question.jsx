@@ -69,7 +69,7 @@ const QuestionForm = () => {
 
   return (
     <div className="items-center min-h-screen bg-gray-100 p-4 w-full">
-      {userData.role !== "contrifbutor" && (
+      {userData.role !== "contributor" && (
         <div className="bg-yellow-400 text-gray-800 py-3 px-4 flex justify-between items-center top-0 left-0 right-0 z-50 shadow-md animate-slideDown">
         <div className="text-lg font-semibold text-red-700 flex items-center">
           🚧 
