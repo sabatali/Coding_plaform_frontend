@@ -418,14 +418,23 @@ const AssignmentForm = () => {
                         {result && (
                             <div className="p-4 border rounded shadow-md">
                                 <h3 className="font-semibold">AI Response:</h3>
-                                <div className="response-content">
-                                    <ReactMarkdown
-                                        components={renderers}
-                                        remarkPlugins={[remarkGfm]} // GitHub flavored markdown support
-                                    >
-                                        {result?.data}
-                                    </ReactMarkdown>
-                                </div>
+                                   <div className="response-content" style={{ margin: '0 20px' }}> {/* Adjust the outer margin */}
+      <ReactMarkdown
+        components={{
+          h1: ({ children }) => <h1 style={{ marginBottom: '1em' }}>{children}</h1>, // Customize h1
+          h2: ({ children }) => <h2 style={{ marginBottom: '1em' }}>{children}</h2>, // Customize h2
+          h3: ({ children }) => <h3 style={{ marginBottom: '1em' }}>{children}</h3>, // Customize h3
+          p: ({ children }) => (
+            <p style={{ marginBottom: '1em' }}> {/* Skip line after each paragraph */}
+              {children}
+            </p>
+          ),
+        }}
+        remarkPlugins={[remarkGfm]} // GitHub flavored markdown support
+      >
+        {result?.data}
+      </ReactMarkdown>
+    </div>
                                 <button
                                     onClick={downloadPDF}
                                     className="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600"
