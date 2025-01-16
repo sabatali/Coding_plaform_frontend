@@ -14,6 +14,8 @@ import AssignmentPrompt from './Components/AssignmentPrompt';
 import BetaBanner from './Components/BetaBanner';
 import FeedbackPage from './pages/FeedbackPage';
 import JavaCodeCompiler from './Components/QuestionComponents/JavaCodeCompiler';
+import SgpaCalculator from './Components/SgpaCalculator';
+
 
 function App() {
   const { isLogin } = useContext(AuthContext);
@@ -40,6 +42,14 @@ function App() {
       ) : (
         <Routes>
           <Route path="/register" element={<Register />} />
+          <Route
+              path="/sgpa"
+              element={
+                <>
+                  <SgpaCalculator />
+                </>
+              }
+            />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
