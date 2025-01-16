@@ -37,6 +37,14 @@ function App() {
             <Route path="/feedbacke" element={<FeedbackPage />} />
             <Route path="/java-compiler" element={<JavaCodeCompiler />} />
             <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route
+              path="/sgpa"
+              element={
+                <>
+                  <SgpaCalculator />
+                </>
+              }
+            />
           </Routes>
         </Template>
       ) : (
