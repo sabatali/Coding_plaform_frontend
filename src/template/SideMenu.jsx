@@ -86,6 +86,14 @@ function SideMenu(props) {
 <FontAwesomeIcon icon={faCode} />        </MenuItem>
 
         <MenuItem
+          to="/sgpa"
+          title="SGPA Calculator"
+          active={location.pathname === "/sgpa"}
+        >
+          <FontAwesomeIcon icon={faPenToSquare} className={itemIconClass} />
+        </MenuItem>
+
+        <MenuItem
           to="/assignmentprompt"
           title="Assignment Writer"
           active={location.pathname === "/assignmentprompt"}
