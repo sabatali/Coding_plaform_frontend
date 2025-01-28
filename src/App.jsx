@@ -1,20 +1,20 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Template from "./template/Template";
-import Dashboard from "./dashboard/Dashboard";
-import Register from './template/Register';
-import QuestionForm from './template/Question';
-import QuestionTable from './tables/questionTable';
-import QuestionDetailsPage from './pages/QuestionDetailsPage';
-import Login from './template/Login';
-import { AuthContext } from './Context/authContext';
 import { useContext } from 'react';
-import ProfilePage from './pages/Profile';
-import { ChatWithAI } from './pages/ChatWithAI';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import AssignmentPrompt from './Components/AssignmentPrompt';
-import BetaBanner from './Components/BetaBanner';
-import FeedbackPage from './pages/FeedbackPage';
 import JavaCodeCompiler from './Components/QuestionComponents/JavaCodeCompiler';
 import SgpaCalculator from './Components/SgpaCalculator';
+import { AuthContext } from './Context/authContext';
+import TransactionPage from './Expense/transactionsPage';
+import Dashboard from "./dashboard/Dashboard";
+import { ChatWithAI } from './pages/ChatWithAI';
+import FeedbackPage from './pages/FeedbackPage';
+import ProfilePage from './pages/Profile';
+import QuestionDetailsPage from './pages/QuestionDetailsPage';
+import QuestionTable from './tables/questionTable';
+import Login from './template/Login';
+import QuestionForm from './template/Question';
+import Register from './template/Register';
+import Template from "./template/Template";
 
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
         <Template>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/sabat/ali/transactions" element={<TransactionPage />} />
             <Route path="/assignmentprompt" element={<AssignmentPrompt />} />
             <Route path="/question" element={<QuestionForm />} />
             <Route path="/profile" element={<ProfilePage />} />
