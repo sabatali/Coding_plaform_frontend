@@ -47,11 +47,10 @@ const AddTransactionForm = () => {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, type: "income" })}
-              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${
-                formData.type === "income"
+              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${formData.type === "income"
                   ? "bg-green-500 text-white"
                   : "bg-gray-200"
-              }`}
+                }`}
             >
               <FiArrowUp className="mr-2" />
               Income
@@ -59,11 +58,10 @@ const AddTransactionForm = () => {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, type: "expense" })}
-              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${
-                formData.type === "expense"
+              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${formData.type === "expense"
                   ? "bg-red-500 text-white"
                   : "bg-gray-200"
-              }`}
+                }`}
             >
               <FiArrowDown className="mr-2" />
               Expense
@@ -71,11 +69,10 @@ const AddTransactionForm = () => {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, type: "given" })}
-              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${
-                formData.type === "given"
+              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${formData.type === "given"
                   ? "bg-purple-500 text-white"
                   : "bg-gray-200"
-              }`}
+                }`}
             >
               <FiArrowDown className="mr-2" />
               Given (dena)
@@ -83,11 +80,10 @@ const AddTransactionForm = () => {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, type: "taken" })}
-              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${
-                formData.type === "taken"
+              className={`flex-1 flex items-center justify-center p-3 rounded-lg ${formData.type === "taken"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200"
-              }`}
+                }`}
             >
               <FiArrowUp className="mr-2" />
               Taken (lena)
@@ -131,7 +127,7 @@ const AddTransactionForm = () => {
         {/* Amount Input */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700">
-            Amount (₹)
+            Amount (Rs)
           </label>
           <input
             type="number"
