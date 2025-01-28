@@ -27,49 +27,49 @@ const TransactionPage = () => {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-  <StatsCard
-    icon={FaMoneyBillWave}
-    title="Total Income"
-    value={`₹${bt?.income?.toFixed(2)}`}
-    color="bg-gradient-to-r from-green-500 to-green-700"
-  />
-  <StatsCard
-    icon={FaMoneyCheckAlt}
-    title="Total Expense"
-    value={`₹${bt?.expense?.toFixed(2)}`}
-    color="bg-gradient-to-r from-red-500 to-red-700"
-  />
-  <StatsCard
-    icon={FaWallet}
-    title="Current Balance"
-    value={`₹${balance?.balance?.toFixed(2)}`}
-    color="bg-gradient-to-r from-blue-500 to-blue-700"
-  />
-  <StatsCard
-    icon={FaHandHoldingUsd}
-    title="Total Cash"
-    value={`₹${balance?.cash?.toFixed(2)}`}
-    color="bg-gradient-to-r from-green-500 to-green-700"
-  />
-  <StatsCard
-    icon={FaCalendarMinus}
-    title="Last Month Expense"
-    value={`₹${lastMonthExpense?.toFixed(2)}`}
-    color="bg-gradient-to-r from-purple-500 to-purple-700"
-  />
-  <StatsCard
-    icon={FaHandHoldingHeart}
-    title="Total Given"
-    value={`₹${bt?.given?.toFixed(2)}`}
-    color="bg-gradient-to-r from-yellow-500 to-yellow-700" // Yellow for lending money
-  />
-  <StatsCard
-    icon={FaPiggyBank}
-    title="Total Taken"
-    value={`₹${bt?.taken?.toFixed(2)}`}
-    color="bg-gradient-to-r from-orange-500 to-orange-700" // Orange for borrowed money
-  />
-</div>
+          <StatsCard
+            icon={FaMoneyBillWave}
+            title="Total Income"
+            value={`₹${bt?.income?.toFixed(2)}`}
+            color="bg-gradient-to-r from-green-500 to-green-700"
+          />
+          <StatsCard
+            icon={FaMoneyCheckAlt}
+            title="Total Expense"
+            value={`₹${bt?.expense?.toFixed(2)}`}
+            color="bg-gradient-to-r from-red-500 to-red-700"
+          />
+          <StatsCard
+            icon={FaWallet}
+            title="Current Balance"
+            value={`₹${balance?.balance?.toFixed(2)}`}
+            color="bg-gradient-to-r from-blue-500 to-blue-700"
+          />
+          <StatsCard
+            icon={FaHandHoldingUsd}
+            title="Total Cash"
+            value={`₹${balance?.cash?.toFixed(2)}`}
+            color="bg-gradient-to-r from-green-500 to-green-700"
+          />
+          <StatsCard
+            icon={FaCalendarMinus}
+            title="Last Month Expense"
+            value={`₹${lastMonthExpense?.toFixed(2)}`}
+            color="bg-gradient-to-r from-purple-500 to-purple-700"
+          />
+          <StatsCard
+            icon={FaHandHoldingHeart}
+            title="Total Payables"
+            value={`₹${bt?.given?.toFixed(2)}`}
+            color="bg-gradient-to-r from-yellow-500 to-yellow-700" // Yellow for lending money
+          />
+          <StatsCard
+            icon={FaPiggyBank}
+            title="Total Receivables"
+            value={`₹${bt?.taken?.toFixed(2)}`}
+            color="bg-gradient-to-r from-orange-500 to-orange-700" // Orange for borrowed money
+          />
+        </div>
 
 
 
