@@ -1,16 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import DotsLoader from './DotsLoader/DotsLoader';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-import PizZip from 'pizzip';
-import Docxtemplater from 'docxtemplater';
-import { saveAs } from 'file-saver';
 import { local_url } from '../constent';
+import DotsLoader from './DotsLoader/DotsLoader';
 
 const AssignmentForm = () => {
     const [result, setResult] = useState(null);
@@ -50,6 +45,7 @@ const AssignmentForm = () => {
         try {
             const response = await axios.post(`${local_url}/api/v1/assingment_prompt`, formData);
             setResult(response.data);
+            console.log("🚀 ~ handleSubmit ~ response:", response)
             // Clear form fields
             setFormData({
                 subjectName: '',
@@ -102,44 +98,9 @@ const AssignmentForm = () => {
     };
 
     const downloadPDF = () => {
-        const content = document.querySelector(".response-content");
-        html2canvas(content).then((canvas) => {
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF("p", "mm", "a4");
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-            pdf.save("response.pdf");
-        });
+        // generatePDF(result?.data);
     };
 
-    const downloadDOC = () => {
-        const content = document.querySelector(".response-content").innerHTML;
-        
-        const doc = new Docxtemplater(new PizZip(), {
-            paragraphLoop: true,
-            linebreaks: true,
-        });
-    
-        // Set the AI response content (you can add more formatting here)
-        doc.setData({ content });
-    
-        try {
-            // Render the document
-            doc.render();
-            
-            const out = doc.getZip().generate({
-                type: "blob",
-                mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            });
-    
-            // Save the DOCX file
-            saveAs(out, "response.docx");
-        } catch (error) {
-            console.error("Error generating document", error);
-        }
-    };
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-indigo-300 to-purple-300 p-8 flex justify-center items-center">
@@ -441,12 +402,7 @@ const AssignmentForm = () => {
                                 >
                                     Download as PDF
                                 </button>
-                                <button
-                                        onClick={downloadDOC}
-                                        className="bg-purple-500 text-white p-2 rounded hover:bg-purple-600"
-                                    >
-                                        Download as DOC
-                                </button>
+                              
                             </div>
                         )}
                     </div>
