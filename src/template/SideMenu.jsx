@@ -24,11 +24,11 @@ function Header(props) {
       className="flex lg:space-x-3 justify-center lg:justify-start lg:px-3 border-b border-gray-900 items-center bg-gray-800 shadow-md"
       style={{ height: headerHeight }}
     >
-{/*      <img src="../../public/code-p.png" alt="Code P" /> */}
+     <img src="../../public/code-p.png" alt="Code P" />
 
-     <h2 className="text-white text-2xl font-semibold hidden px-4 lg:inline">
+{/*      <h2 className="text-white text-2xl font-semibold hidden px-4 lg:inline">
         {props.title}
-      </h2>
+      </h2> */}
     </div>
   );
 }
