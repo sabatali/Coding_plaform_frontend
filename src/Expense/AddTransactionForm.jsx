@@ -15,7 +15,7 @@ const AddTransactionForm = () => {
   });
   const categories = {
     income: ["Salary", "Gift", "FH", "Upwork", "Other"],
-    expense: ["Food", "Transport", "Rent", "Other"],
+    expense: ["Food", "Transport", "Rent", "shopping", "Other"],
     given: ["Loan", "Gift", "Rent", "Food", "Other"],
     taken: ["Loan", "Gift", "Rent", "Food", "Other"],
   };
