@@ -64,8 +64,8 @@ const TransactionTable = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {sortedTransactions.map((transaction) => (
-            <tr key={transaction._id, index} className="hover:bg-gray-50">
+          {sortedTransactions.map((transaction, index) => (
+            <tr key={transaction._id} className="hover:bg-gray-50">
               <td className="px-6 py-4 whitespace-nowrap">
                 {index + 1}
               </td>
